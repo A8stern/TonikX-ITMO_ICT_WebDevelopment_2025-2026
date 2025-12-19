@@ -31,12 +31,12 @@ jobs:
 
       - name: Build site
         working-directory: students/k3341/Kovalev_Gleb
-        run: mkdocs build --site-dir ../../../../site
+        run: mkdocs build --site-dir site
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./site
+          path: students/k3341/Kovalev_Gleb/site
 
   deploy:
     needs: build
