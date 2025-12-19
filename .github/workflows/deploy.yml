@@ -26,5 +26,6 @@ jobs:
           pip install mkdocs mkdocs-material
 
       - name: Build and deploy
+        working-directory: students/k3341/Kovalev_Gleb
         run: |
           mkdocs gh-deploy --force
