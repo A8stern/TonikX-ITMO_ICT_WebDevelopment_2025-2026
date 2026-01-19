@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Car detail</title>
+</head>
+<body>
+  <h1>Car</h1>
+
+  <p>Plate: {{ car.plate_number }}</p>
+  <p>Brand: {{ car.brand }}</p>
+  <p>Model: {{ car.model }}</p>
+  <p>Color: {{ car.color }}</p>
+
+  <p><a href="/cars/">Back to list</a></p>
+  <p><a href="/cars/{{ car.pk }}/edit/">Edit</a></p>
+</body>
+</html>

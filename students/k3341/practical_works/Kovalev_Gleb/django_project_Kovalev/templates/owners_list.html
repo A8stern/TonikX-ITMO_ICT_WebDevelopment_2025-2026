@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Owners</title>
+</head>
+<body>
+  <h1>Owners (Users)</h1>
+
+  <p>
+    <a href="/owners/create/">Create new owner</a> |
+    <a href="/cars/">Go to cars</a>
+  </p>
+
+  {% if owners %}
+    <ul>
+      {% for o in owners %}
+        <li>
+          {{ o.last_name }} {{ o.first_name }} ({{ o.username }})
+          | Passport: {{ o.passport_number }}
+          | Address: {{ o.home_address }}
+          | Nationality: {{ o.nationality }}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No owners yet.</p>
+  {% endif %}
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Cars</title>
+</head>
+<body>
+  <h1>Cars</h1>
+
+  <p>
+    <a href="/cars/create/">Create new car</a> |
+    <a href="/owners/">Go to owners</a>
+  </p>
+
+  {% if cars %}
+    <ul>
+      {% for c in cars %}
+        <li>
+          <a href="/cars/{{ c.pk }}/">{{ c.plate_number }} — {{ c.brand }} {{ c.model }}</a>
+          | <a href="/cars/{{ c.pk }}/edit/">edit</a>
+          | <a href="/cars/{{ c.pk }}/delete/">delete</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No cars yet.</p>
+  {% endif %}
+</body>
+</html>
