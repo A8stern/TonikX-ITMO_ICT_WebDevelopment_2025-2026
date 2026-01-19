@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}{{ hotel.name }}{% endblock %}
+
+{% block content %}
+  <div class="card">
+    <p><a href="/">← Back to hotels</a></p>
+
+    <h1>{{ hotel.name }}</h1>
+    <p><b>Address:</b> {{ hotel.address }}</p>
+
+    {% if hotel.description %}
+      <p>{{ hotel.description }}</p>
+    {% endif %}
+
+    <p>
+      <a class="btn btn-default" href="/hotels/{{ hotel.pk }}/guests-last-month/">Guests last month</a>
+    </p>
+
+    <h2>Room types</h2>
+
+    {% if room_types %}
+      <ul class="list-group">
+        {% for rt in room_types %}
+          <li class="list-group-item">
+            <a href="/rooms/{{ rt.pk }}/"><b>{{ rt.room_type.title }}</b></a>
+            <span class="pill">available: {{ rt.available_units }}</span>
+            <br>
+            <small>
+              capacity: {{ rt.capacity }} |
+              price/night: {{ rt.price_per_night }} |
+              total: {{ rt.total_units }} |
+              occupied: {{ rt.occupied_units }}
+            </small>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No room types yet.</p>
+    {% endif %}
+  </div>
+{% endblock %}

@@ -1,0 +1,1 @@
+default_app_config = "project_second_lab.apps.ProjectSecondLabConfig"

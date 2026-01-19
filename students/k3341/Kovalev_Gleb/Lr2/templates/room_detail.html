@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block title %}{{ hotel.name }} — {{ room_type.title }}{% endblock %}
+
+{% block content %}
+  <div class="card">
+    <p><a href="/hotels/{{ hotel.pk }}/">← Back to hotel</a></p>
+
+    <h1>{{ room_type.title }}</h1>
+    <p><b>Hotel:</b> {{ hotel.name }}</p>
+
+    {% if room_type.description %}
+      <p>{{ room_type.description }}</p>
+    {% endif %}
+
+    <p><b>Capacity:</b> {{ hrt.capacity }}</p>
+    <p><b>Price/night:</b> {{ hrt.price_per_night }}</p>
+    <p><b>Total units:</b> {{ hrt.total_units }}</p>
+    <p><b>Occupied units:</b> {{ hrt.occupied_units }}</p>
+    <p><b>Available units:</b> {{ hrt.available_units }}</p>
+
+    {% if room_type.amenities.all %}
+      <p><b>Amenities:</b>
+        {% for a in room_type.amenities.all %}
+          {{ a.name }}{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+      </p>
+    {% endif %}
+
+    {% if error_message %}
+      <div class="errorish">{{ error_message }}</div>
+    {% endif %}
+  </div>
+
+  <div class="card">
+    <h2>Reservations</h2>
+
+    {% if user.is_authenticated %}
+      <h3>Reserve this room type</h3>
+      <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="action" value="reserve">
+        {{ reservation_form.as_p }}
+        <button class="btn btn-warning" type="submit">Reserve</button>
+      </form>
+
+      <hr>
+
+      <h3>My active reservations</h3>
+      {% if my_active_reservations %}
+        <ul class="list-group">
+          {% for r in my_active_reservations %}
+            <li class="list-group-item">
+              {{ r.check_in }} → {{ r.check_out }}
+              <span class="pill">{{ r.get_status_display }}</span>
+
+              {% if r.status == "BOOKED" %}
+                <a class="btn btn-default btn-xs" href="/reservations/{{ r.pk }}/edit/">Edit</a>
+              {% endif %}
+
+              <form method="post" style="display:inline">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="cancel_reservation">
+                <input type="hidden" name="reservation_id" value="{{ r.pk }}">
+                <button class="btn btn-danger btn-xs" type="submit">Cancel</button>
+              </form>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>No active reservations.</p>
+      {% endif %}
+
+    {% else %}
+      <p>
+        <a class="btn btn-primary" href="/accounts/login/?next=/rooms/{{ hrt.pk }}/">Log in</a>
+        to reserve and leave reviews.
+      </p>
+    {% endif %}
+  </div>
+
+  <div class="card">
+    <h2>Reviews</h2>
+
+    {% if user.is_authenticated %}
+      <h3>Leave a review</h3>
+      <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="action" value="add_review">
+        {{ review_form.as_p }}
+        <button class="btn btn-primary" type="submit">Submit review</button>
+      </form>
+      <hr>
+    {% endif %}
+
+    {% if reviews %}
+      <ul class="list-group">
+        {% for rev in reviews %}
+          <li class="list-group-item">
+            <b>{{ rev.author.username }}</b>
+            <span class="pill">{{ rev.rating }}/10</span>
+            <br>
+            <small>{{ rev.stay_from }} → {{ rev.stay_to }}</small>
+            <p style="margin-top:10px;">{{ rev.text }}</p>
+            <small>{{ rev.created_at }}</small>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No reviews yet.</p>
+    {% endif %}
+  </div>
+{% endblock %}
