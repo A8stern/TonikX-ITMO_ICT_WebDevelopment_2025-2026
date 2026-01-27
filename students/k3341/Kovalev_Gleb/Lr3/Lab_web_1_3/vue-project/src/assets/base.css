@@ -1,0 +1,20 @@
+:root{
+  /* твои переменные (или пусть живут в main.css — но тогда тут хотя бы не мешаем) */
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after{
+  box-sizing: border-box;
+}
+
+html, body{
+  height: 100%;
+}
+
+body{
+  margin: 0;
+  /* НЕ задаём background и color тут, это делает main.css */
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+}

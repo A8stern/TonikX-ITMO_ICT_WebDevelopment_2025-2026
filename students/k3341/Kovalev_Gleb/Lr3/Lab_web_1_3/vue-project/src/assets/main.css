@@ -1,0 +1,158 @@
+:root{
+  /* base */
+  --bg: #f6f7fb;
+  --surface: #ffffff;
+  --panel: #ffffff;
+  --panel2: #fbfcff;
+
+  --border: #e7eaf2;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --muted2: #9aa3b2;
+
+  /* pastel accents */
+  --accent: #ffcc00;   /* можно оставить как акцент */
+  --accent2:#ffe38a;
+
+  --primary: #6ea8fe;  /* пастельный синий */
+  --primary-soft: rgba(110,168,254,.18);
+
+  --mint: #6ee7b7;
+  --mint-soft: rgba(110,231,183,.22);
+
+  --pink: #f9a8d4;
+  --pink-soft: rgba(249,168,212,.18);
+
+  --danger: #ef4444;
+  --danger-soft: rgba(239,68,68,.12);
+
+  --radius: 14px;
+  --shadow: 0 14px 34px rgba(27, 40, 70, .08);
+  --shadow2: 0 8px 18px rgba(27, 40, 70, .06);
+}
+
+*,
+*::before,
+*::after{ box-sizing: border-box; }
+
+html, body{ height: 100%; }
+
+body{
+  margin: 0;
+  background:
+    radial-gradient(900px 450px at 0% 0%, rgba(110,168,254,.22), transparent 60%),
+    radial-gradient(900px 450px at 100% 0%, rgba(249,168,212,.18), transparent 60%),
+    var(--bg);
+  color: var(--text);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+}
+
+#app{
+  min-height: 100vh;
+  color: var(--text);
+}
+
+a{ color: inherit; text-decoration: none; }
+a:hover{ opacity: .95; }
+
+.container{
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.h1{ font-size: 28px; font-weight: 900; margin: 0; }
+.h2{ font-size: 20px; font-weight: 800; margin: 0; }
+.muted{ color: var(--muted); }
+
+.card{
+  background: linear-gradient(180deg, var(--panel), var(--panel2));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.card-pad{ padding: 14px; }
+
+.badge{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(110,168,254,.14);
+  border: 1px solid rgba(110,168,254,.22);
+  color: #2457b7;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.badge-muted{
+  background: rgba(107,114,128,.10);
+  border-color: rgba(107,114,128,.18);
+  color: var(--muted);
+}
+
+.hr{ border: none; border-top: 1px solid var(--border); margin: 12px 0; }
+
+input, select, button{ font: inherit; }
+
+.input, input, select{
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px 12px;
+  outline: none;
+  box-shadow: var(--shadow2);
+}
+
+input::placeholder{ color: var(--muted2); }
+
+.input:focus, input:focus, select:focus{
+  border-color: rgba(110,168,254,.55);
+  box-shadow: 0 0 0 4px rgba(110,168,254,.18);
+}
+
+.btn, button{
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  border-radius: 12px;
+  padding: 10px 12px;
+  cursor: pointer;
+  box-shadow: var(--shadow2);
+  transition: transform .08s ease, box-shadow .12s ease, border-color .12s ease, opacity .12s ease;
+}
+
+button:hover{
+  transform: translateY(-1px);
+  border-color: rgba(110,168,254,.35);
+}
+
+button:disabled{
+  opacity: .55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-accent{
+  background: linear-gradient(180deg, var(--accent2), var(--accent));
+  border-color: rgba(0,0,0,.08);
+  color: #111;
+  font-weight: 800;
+}
+
+.btn-primary{
+  background: rgba(110,168,254,.18);
+  border-color: rgba(110,168,254,.35);
+  color: #2457b7;
+  font-weight: 800;
+}
+
+.btn-danger{
+  background: var(--danger-soft);
+  border-color: rgba(239,68,68,.28);
+  color: #a01414;
+  font-weight: 800;
+}
